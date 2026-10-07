@@ -1,0 +1,161 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * KÔRÔ — design system
+ * Palette: noir profond, crème, terracotta, brun, or.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-cream: var(--cream);
+  --color-terracotta: var(--terracotta);
+  --color-gold: var(--gold);
+  --color-brown: var(--brown);
+  --color-ink: var(--ink);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --tracking-brand: 0.28em;
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --ink: oklch(0.16 0.012 40);
+  --cream: oklch(0.945 0.017 80);
+  --terracotta: oklch(0.585 0.135 39);
+  --gold: oklch(0.79 0.108 84);
+  --brown: oklch(0.34 0.045 48);
+
+  --background: oklch(0.16 0.012 40);
+  --foreground: oklch(0.945 0.017 80);
+  --card: oklch(0.205 0.017 44);
+  --card-foreground: oklch(0.945 0.017 80);
+  --popover: oklch(0.205 0.017 44);
+  --popover-foreground: oklch(0.945 0.017 80);
+  --primary: oklch(0.585 0.135 39);
+  --primary-foreground: oklch(0.975 0.012 80);
+  --secondary: oklch(0.26 0.024 46);
+  --secondary-foreground: oklch(0.945 0.017 80);
+  --muted: oklch(0.24 0.02 46);
+  --muted-foreground: oklch(0.72 0.025 70);
+  --accent: oklch(0.79 0.108 84);
+  --accent-foreground: oklch(0.18 0.014 40);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.975 0.012 80);
+  --border: oklch(0.945 0.017 80 / 14%);
+  --input: oklch(0.945 0.017 80 / 20%);
+  --ring: oklch(0.79 0.108 84 / 60%);
+
+  --gradient-ember: linear-gradient(135deg, var(--terracotta), var(--gold));
+  --shadow-lift: 0 30px 60px -30px oklch(0 0 0 / 70%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--cream);
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@utility gold-rule {
+  height: 1px;
+  width: 4rem;
+  background: var(--gradient-ember);
+}
+
+@utility text-ember {
+  background: var(--gradient-ember);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+      oklch(1 0 0 / 5%) 1px,
+      transparent 1px
+    );
+    background-size: 3px 3px;
+    opacity: 0.35;
+  }
+}
